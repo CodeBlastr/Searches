@@ -5,7 +5,7 @@ echo $this->Form->create('SearchIndex', array(
     'plugin' => 'searchable',
     'controller' => 'search_indexes',
     'action' => 'advance',
-	'model' => isset($this->params['named']['model']) ? $this->params['named']['model'] : ''  
+	'model' => isset($this->request->params['named']['model']) ? $this->request->params['named']['model'] : ''  
   )
 ));
 
@@ -13,7 +13,7 @@ $range = array('>' => '>', '<' => '<', '>=' => '>=',
 					 '<=' => '<=', '=' => '=');
 $set_model = false;
 foreach($xmlInput as $model => $xml) {
-	if(isset($this->params['named']['model']) && $this->params['named']['model'] != $model) {
+	if(isset($this->request->params['named']['model']) && $this->request->params['named']['model'] != $model) {
 		continue;	
 	} 
 	

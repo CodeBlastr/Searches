@@ -47,10 +47,10 @@ class SearchIndexesController extends SearchableAppController {
 			} 
 		} else {
 			// Add type condition if not All for post type
-			if (isset($this->params['named']['term']))
-				$term = $this->params['named']['term'];
-			if (isset($this->params['named']['type'])) {
-					$type = $this->params['named']['type'];
+			if (isset($this->request->params['named']['term']))
+				$term = $this->request->params['named']['term'];
+			if (isset($this->request->params['named']['type'])) {
+					$type = $this->request->params['named']['type'];
 			}
 			// for the get type url
 			if (isset($this->params['url']['term']))
