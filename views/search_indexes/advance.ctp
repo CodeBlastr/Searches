@@ -66,9 +66,9 @@ echo $this->Form->end('View Advanced Search Results');
 	  
 	  <?php if (isset($paginator)) {?>
 	  <div class="paging">
-		    <?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
-		   | 	<?php echo $paginator->numbers();?>
-		    <?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
+		    <?php echo $this->Paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
+		   | 	<?php echo $this->Paginator->numbers();?>
+		    <?php echo $this->Paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 		  </div>
 	  <?php }?>
 
