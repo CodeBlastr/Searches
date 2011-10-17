@@ -1,6 +1,6 @@
 <h2>Advance Search results</h2>
 <?php 
-echo $form->create('SearchIndex', array(
+echo $this->Form->create('SearchIndex', array(
   'url' => array(
     'plugin' => 'searchable',
     'controller' => 'search_indexes',
@@ -19,16 +19,16 @@ foreach($xmlInput as $model => $xml) {
 	
 	echo"<h2>{$model}</h2>";
 	foreach($xml['Fields'] as $key => $field) {
-		echo $form->hidden("SearchIndex.{$model}.Fields.{$key}.name", array('value' => "{$model}.{$field['name']}"));
-		echo $form->input("SearchIndex.{$model}.Fields.{$key}.value", array('label' => $field['label'], 
+		echo $this->Form->hidden("SearchIndex.{$model}.Fields.{$key}.name", array('value' => "{$model}.{$field['name']}"));
+		echo $this->Form->input("SearchIndex.{$model}.Fields.{$key}.value", array('label' => $field['label'], 
 							'type' => $field['fieldtype'], 'empty' => true));
-		echo $form->hidden("SearchIndex.{$model}.Fields.{$key}.type", array('value' => $field['type']));
+		echo $this->Form->hidden("SearchIndex.{$model}.Fields.{$key}.type", array('value' => $field['type']));
 	}
-	echo $form->hidden("SearchIndex.{$model}.SearchType", array('value' => 'AND'));
+	echo $this->Form->hidden("SearchIndex.{$model}.SearchType", array('value' => 'AND'));
 }		
  
 echo "<br/>";
-echo $form->end('View Advanced Search Results');
+echo $this->Form->end('View Advanced Search Results');
 
 ?>
 <?php if (!empty($results)): ?>

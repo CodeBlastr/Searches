@@ -1,7 +1,7 @@
 <div id="searchIndex" class="searchIndex">
 <h2>Search results</h2>
 <?php
-echo $form->create('SearchIndex', array(
+echo $this->Form->create('SearchIndex', array(
   'type' => 'get',
   'url' => array(
     'plugin' => 'searchable',
@@ -9,9 +9,9 @@ echo $form->create('SearchIndex', array(
     'action' => 'index'
   )
 ));
-echo $form->input('term', array('label' => 'Search', 'value'=>$term));
-echo $form->select('type', $models, $type, array('empty' => 'All'));
-echo $form->end('View Search Results');
+echo $this->Form->input('term', array('label' => 'Search', 'value'=>$term));
+echo $this->Form->select('type', $models, $type, array('empty' => 'All'));
+echo $this->Form->end('View Search Results');
 echo $this->Html->link('Advanced Search', array('action' => 'advance'));
 ?>
 <div id="searchResults" class="searchResults">
