@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Search>
+	<CatalogItem>
+		<result>
+			<plugin>catalogs</plugin>
+			<controller>catalog_items</controller>
+			<action>view</action>
+			<id>id</id>
+			<title>name</title>
+			<description>description</description>
+		</result>
+		<fields>			
+			<_0>
+				<name>name</name>
+				<type>like</type>
+			</_0>
+			<_1>
+				<name>description</name>
+				<type>like</type>         
+			</_1>	
+		</fields>
+	</CatalogItem>
+	<Categories>
+		<result>
+			<plugin>categories</plugin>
+			<controller>categories</controller>
+			<action>view</action>
+			<id>id</id>
+			<title>name</title>
+			<description>description</description>
+		</result>
+		<fields>
+			<_0>	
+				<name>name</name>
+				<type>like</type>
+			</_0>
+			<_1>
+				<name>description</name>
+				<type>like</type>
+			</_1>
+		</fields>
+	</Categories>
+</Search>
