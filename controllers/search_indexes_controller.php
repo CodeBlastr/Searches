@@ -35,15 +35,15 @@ class SearchIndexesController extends SearchableAppController {
 		$term = null;
 		$type = '';
 		// Redirect with search data in the URL in pretty format
-		if (!empty($this->data)) {
-			if (isset($this->data['SearchIndex']['term'])
-			&& !empty($this->data['SearchIndex']['term'])) {
-				$term = $this->data['SearchIndex']['term'];
+		if (!empty($this->request->data)) {
+			if (isset($this->request->data['SearchIndex']['term'])
+			&& !empty($this->request->data['SearchIndex']['term'])) {
+				$term = $this->request->data['SearchIndex']['term'];
 			} 
 			
-			if (isset($this->data['SearchIndex']['type'])
-				&& !empty($this->data['SearchIndex']['type'])) {
-				$type = $this->data['SearchIndex']['type'];
+			if (isset($this->request->data['SearchIndex']['type'])
+				&& !empty($this->request->data['SearchIndex']['type'])) {
+				$type = $this->request->data['SearchIndex']['type'];
 			} 
 		} else {
 			// Add type condition if not All for post type
@@ -77,7 +77,7 @@ class SearchIndexesController extends SearchableAppController {
 				}
 			}
 		}
-		if ($input && ($term || $this->data)) :
+		if ($input && ($term || $this->request->data)) :
 			$results = $this->getResults($input, $showAll);
 		else :
 			$results = array();
@@ -97,8 +97,8 @@ class SearchIndexesController extends SearchableAppController {
 		$term = null;
 		$type = null;
 		// Redirect with search data in the URL in pretty format
-		if (!empty($this->data)) {
-			$results = $this->getResults($this->data['SearchIndex'], null, 'AND');
+		if (!empty($this->request->data)) {
+			$results = $this->getResults($this->request->data['SearchIndex'], null, 'AND');
 		}
 		// Get types for select drop down
 		$this->set(compact('results'));

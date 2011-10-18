@@ -66,7 +66,7 @@ echo $this->Html->link('Advanced Search', array('action' => 'advance'));
 		    <?php echo $this->Paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 		  </div>
 	  <?php }?>
-<?php elseif($term || $this->data) : ?>
+<?php elseif($term || $this->request->data) : ?>
   <p>Sorry, your search did not return any matches.</p>
   <?php echo $this->Html->link('See Only Orders/Projects', array('action' => 'advance'));?>
 <?php endif; ?>

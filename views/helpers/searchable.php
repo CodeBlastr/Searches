@@ -3,7 +3,7 @@ class SearchableHelper extends AppHelper {
   var $helpers = array('Html', 'Text');
   function snippets($data) {
     $data = json_decode($data, true);
-    $term = trim($this->data['SearchIndex']['term']);
+    $term = trim($this->request->data['SearchIndex']['term']);
     $snippets = '';
     while (strlen($snippets) < 255
     && $value = next($data)) {
