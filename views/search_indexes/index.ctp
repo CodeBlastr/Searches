@@ -54,7 +54,7 @@ echo $this->Html->link('Advanced Search', array('action' => 'advance'));
 	  </ul>
 </div>
 	  <?php
-	  /*$params = array_intersect_key($this->params, array_flip(array('type', 'term')));
+	  /*$params = array_intersect_key($this->request->params, array_flip(array('type', 'term')));
 	  $params = array_map('urlencode', $params);
 	  $params = array_map('urlencode', $params);
 	  $this->Paginator->options(array('url' => $params));*/

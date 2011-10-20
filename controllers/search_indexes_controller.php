@@ -53,10 +53,10 @@ class SearchIndexesController extends SearchableAppController {
 					$type = $this->request->params['named']['type'];
 			}
 			// for the get type url
-			if (isset($this->params['url']['term']))
-				$term = $this->params['url']['term'];
-			if (isset($this->params['url']['type'])) {
-				$type  = $this->params['url']['type'];
+			if (isset($this->request->params['url']['term']))
+				$term = $this->request->params['url']['term'];
+			if (isset($this->request->params['url']['type'])) {
+				$type  = $this->request->params['url']['type'];
 			}
 				
 		}
