@@ -126,7 +126,7 @@ protected function _setDbConfig() {
 protected function _setAvailableModels() {
 
 	// Initialise paths array with paths to app/models
-	$paths = array(MODELS);
+	$paths = array(APP . 'Model' . DS);
 
 	// Get a list of the plugins
 	$plugins = Configure::listObjects('plugin');
