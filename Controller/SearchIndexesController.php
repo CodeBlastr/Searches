@@ -22,9 +22,10 @@ Webpage[advanced] = "
  */
 class SearchIndexesController extends SearchableAppController {
 
-	var $name = 'SearchIndexes';
+	public $name = 'SearchIndexes';
+	public $uses = 'Searchable.SearchIndex';
 	//var $paginate = array('SearchIndex' => array('limit' => 20));
-	var $helpers = array('Searchable.Searchable');
+	public $helpers = array('Searchable.Searchable');
 
 	function admin_index() {
 		$this->index();
