@@ -35,7 +35,7 @@ class SearchIndexesController extends SearchableAppController {
 	function index() {
 		$term = null;
 		$type = '';
-		// Redirect with search data in the URL in pretty format
+		# Redirect with search data in the URL in pretty format
 		if (!empty($this->request->data)) {
 			if (isset($this->request->data['SearchIndex']['term'])
 			&& !empty($this->request->data['SearchIndex']['term'])) {
@@ -47,17 +47,17 @@ class SearchIndexesController extends SearchableAppController {
 				$type = $this->request->data['SearchIndex']['type'];
 			} 
 		} else {
-			// Add type condition if not All for post type
+			# Add type condition if not All for post type
 			if (isset($this->request->params['named']['term']))
 				$term = $this->request->params['named']['term'];
 			if (isset($this->request->params['named']['type'])) {
 					$type = $this->request->params['named']['type'];
 			}
-			// for the get type url
-			if (isset($this->request->params['url']['term']))
-				$term = $this->request->params['url']['term'];
-			if (isset($this->request->params['url']['type'])) {
-				$type  = $this->request->params['url']['type'];
+			# for the get type url
+			if (isset($this->request->query['term']))
+				$term = $this->request->query['term'];
+			if (isset($this->request->query['type'])) {
+				$type  = $this->request->query['type'];
 			}
 				
 		}
@@ -73,7 +73,7 @@ class SearchIndexesController extends SearchableAppController {
 			if ($model == $type || $type == '') {
 				$input[$model] = $val;
 				# the db fields to setup the search query
-				foreach ($input[$model]['Fields'] as $key => &$fields) {
+				foreach ($input[$model]['fields'] as $key => &$fields) {
 					$fields['value'] = $term;
 				}
 			}
@@ -122,8 +122,8 @@ class SearchIndexesController extends SearchableAppController {
 			$types[$model] = $model;
 
 			$Model = ClassRegistry::init($model);
-			// for future date type input arrays
-			foreach($val['Fields'] as &$field) {
+			# for future date type input arrays
+			foreach($val['fields'] as &$field) {
 				if(is_array($field['value'])){
 					if( !empty($field['value']['month']) && !empty($field['value']['day'])
 								&& !empty($field['value']['year']) ) {
@@ -135,11 +135,11 @@ class SearchIndexesController extends SearchableAppController {
 				}
 			}
 			
-			$options['conditions'] = $this->SearchIndex->parseCriteria($Model, $val['Fields'], $searchType);	
-				
-			if (!$showAll)
-				$options['limit'] = 1;
-	
+			$options['conditions'] = $this->SearchIndex->parseCriteria($Model, $val['fields'], $searchType);
+			if (!$showAll) {
+				$options['limit'] = 3;
+			}
+			
 			$results[$model] = $Model->find('all', $options);
 		}
 
@@ -147,17 +147,16 @@ class SearchIndexesController extends SearchableAppController {
 	}
 	
 	function getXml() {
-		App::import('Xml');
 		// XML file's location
-		if (file_exists(ROOT.DS.APP_DIR.DS. 'config'.DS.'searchable'.DS.'search.xml')) {
-			$file = ROOT.DS.APP_DIR.DS. 'config'.DS.'searchable'.DS.'search.xml'; // site specific
+		if (file_exists(ROOT.DS.APP_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml')) {
+			$file = ROOT.DS.APP_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml'; // site specific
 		} else {
-			$file = ROOT.DS.'app'.DS.'plugins'.DS.'searchable'.DS. 'config'. DS. "search.xml"; // default in the plugin
+			$file = ROOT.DS.'app'.DS.'Plugin'.DS.'Searchable'.DS. 'Config'. DS. "search.xml"; // default in the plugin
 		}
 		// now parse it
-		$parsed_xml =& new Xml($file);
-		if ($parsed_xml ) {
-			$xml = Set::reverse($parsed_xml);
+		$parsedXml = Xml::build($file);
+		if ($parsedXml) {
+			$xml = Set::reverse($parsedXml);
 			$input = $xml['Search'];
 			return $input;
 		} else {

@@ -18,11 +18,11 @@ foreach($xmlInput as $model => $xml) {
 	} 
 	
 	echo"<h2>{$model}</h2>";
-	foreach($xml['Fields'] as $key => $field) {
-		echo $this->Form->hidden("SearchIndex.{$model}.Fields.{$key}.name", array('value' => "{$model}.{$field['name']}"));
-		echo $this->Form->input("SearchIndex.{$model}.Fields.{$key}.value", array('label' => $field['label'], 
-							'type' => $field['fieldtype'], 'empty' => true));
-		echo $this->Form->hidden("SearchIndex.{$model}.Fields.{$key}.type", array('value' => $field['type']));
+	foreach($xml['fields'] as $key => $field) {
+		echo $this->Form->hidden("SearchIndex.{$model}.fields.{$key}.name", array('value' => "{$model}.{$field['name']}"));
+		echo $this->Form->input("SearchIndex.{$model}.fields.{$key}.value", array('label' => $field['name'], 
+							/*'type' => $field['fieldtype'],*/ 'empty' => true));
+		echo $this->Form->hidden("SearchIndex.{$model}.fields.{$key}.type", array('value' => $field['type']));
 	}
 	echo $this->Form->hidden("SearchIndex.{$model}.SearchType", array('value' => 'AND'));
 }		
@@ -39,14 +39,14 @@ echo $this->Form->end('View Advanced Search Results');
 	    <?php foreach ($data as $result) {?>
 	    <li>
 	    <?php
-	     	if ($xmlInput[$model]['Result']) {
-				$url = array('plugin' => $xmlInput[$model]['Result']['plugin'],
-					'controller' => $xmlInput[$model]['Result']['controller'],
-					'action' => $xmlInput[$model]['Result']['action'],
-					$result[$model][$xmlInput[$model]['Result']['id']]
+	     	if ($xmlInput[$model]['result']) {
+				$url = array('plugin' => $xmlInput[$model]['result']['plugin'],
+					'controller' => $xmlInput[$model]['result']['controller'],
+					'action' => $xmlInput[$model]['result']['action'],
+					$result[$model][$xmlInput[$model]['result']['id']]
 			);
-			$title = $result[$model][$xmlInput[$model]['Result']['title']];
-			$description = substr(strip_tags($result[$model][$xmlInput[$model]['Result']['description']]), 0, 50);
+			$title = $result[$model][$xmlInput[$model]['result']['title']];
+			$description = substr(strip_tags($result[$model][$xmlInput[$model]['result']['description']]), 0, 50);
 		} else {
 			$url = '#';
 			$title = $result[$model]['name'];
