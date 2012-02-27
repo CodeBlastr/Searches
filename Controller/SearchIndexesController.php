@@ -148,8 +148,8 @@ class SearchIndexesController extends SearchableAppController {
 	
 	function getXml() {
 		// XML file's location
-		if (file_exists(ROOT.DS.APP_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml')) {
-			$file = ROOT.DS.APP_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml'; // site specific
+		if (file_exists(ROOT.DS.SITE_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml')) {
+			$file = ROOT.DS.SITE_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml'; // site specific
 		} else {
 			$file = ROOT.DS.'app'.DS.'Plugin'.DS.'Searchable'.DS. 'Config'. DS. "search.xml"; // default in the plugin
 		}
