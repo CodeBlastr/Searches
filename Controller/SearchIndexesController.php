@@ -26,13 +26,9 @@ class SearchIndexesController extends SearchableAppController {
 	public $uses = 'Searchable.SearchIndex';
 	//var $paginate = array('SearchIndex' => array('limit' => 20));
 	public $helpers = array('Searchable.Searchable');
-
-	function admin_index() {
-		$this->index();
-	}
 	
 	
-	function index() {
+	public function index() {
 		$term = null;
 		$type = '';
 		# Redirect with search data in the URL in pretty format
@@ -93,7 +89,7 @@ class SearchIndexesController extends SearchableAppController {
 	}
 	
 	
-	function advance() {
+	public function advance() {
 		
 		$term = null;
 		$type = null;
@@ -110,9 +106,9 @@ class SearchIndexesController extends SearchableAppController {
 
 	
 /**
-	 * getResults
-	 * Iterates over the search.xml to get the conditions and pass them to get the results of the models
-	 * @return unknown_type
+ * getResults
+ * Iterates over the search.xml to get the conditions and pass them to get the results of the models
+ * @return unknown_type
 */
 	public function getResults($input, $showAll = true, $searchType = 'OR') {
 
@@ -146,7 +142,7 @@ class SearchIndexesController extends SearchableAppController {
 		return $results;
 	}
 	
-	function getXml() {
+	public function getXml() {
 		// XML file's location
 		if (file_exists(ROOT.DS.SITE_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml')) {
 			$file = ROOT.DS.SITE_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml'; // site specific
@@ -164,4 +160,3 @@ class SearchIndexesController extends SearchableAppController {
 		}
 	}
  }
-?>
