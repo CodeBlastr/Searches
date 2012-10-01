@@ -2,23 +2,6 @@
 /**
  * Search Indexes Controller
  *
- *
-the settings.ini might look something like this....
-
-[search]
-model[] = CatalogItem
-model[] = Webpage
-Webpage[query] = "
-	OR[] = name
-	OR[] = type
-	AND[] = content
-"
-Webpage[advanced] = "
-	 name = text
-	 type = checkbox
-	 content = text
-"
-
  */
 class SearchIndexesController extends SearchableAppController {
 
@@ -31,7 +14,7 @@ class SearchIndexesController extends SearchableAppController {
 	public function index() {
 		$term = null;
 		$type = '';
-		# Redirect with search data in the URL in pretty format
+		// Redirect with search data in the URL in pretty format
 		if (!empty($this->request->data)) {
 			if (isset($this->request->data['SearchIndex']['term'])
 			&& !empty($this->request->data['SearchIndex']['term'])) {
@@ -43,13 +26,13 @@ class SearchIndexesController extends SearchableAppController {
 				$type = $this->request->data['SearchIndex']['type'];
 			} 
 		} else {
-			# Add type condition if not All for post type
+			// Add type condition if not All for post type
 			if (isset($this->request->params['named']['term']))
 				$term = $this->request->params['named']['term'];
 			if (isset($this->request->params['named']['type'])) {
 					$type = $this->request->params['named']['type'];
 			}
-			# for the get type url
+			// for the get type url
 			if (isset($this->request->query['term']))
 				$term = $this->request->query['term'];
 			if (isset($this->request->query['type'])) {
@@ -153,8 +136,7 @@ class SearchIndexesController extends SearchableAppController {
 		$parsedXml = Xml::build($file);
 		if ($parsedXml) {
 			$xml = Set::reverse($parsedXml);
-			$input = $xml['Search'];
-			return $input;
+			return $xml['Search'];
 		} else {
 			throw Exception('No Search Configuration Present');
 		}
