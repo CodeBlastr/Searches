@@ -460,9 +460,10 @@ class SearchableBehavior extends ModelBehavior {
  *
  * @param array $data Criteria of key->value pairs from post/named parameters
  * @return array Array of conditions that express the conditions needed for the search.
+ * @todo see if this can be deleted, we shouldn't be referring to the Product model like this, hard coded
  */
 	public function parseCriteria() {
-		$model = ClassRegistry::init('CatalogItem');
+		$model = ClassRegistry::init('Product');
 		$fields = array(
 			array('name' => 'name', 'type' => 'value'),
 			array('name' => 'description', 'type' => 'like'),

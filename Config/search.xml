@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Search>
-	<CatalogItem>
+	<Product>
 		<result>
-			<plugin>catalogs</plugin>
-			<controller>catalog_items</controller>
+			<plugin>products</plugin>
+			<controller>products</controller>
 			<action>view</action>
 			<id>id</id>
 			<title>name</title>
@@ -19,7 +19,7 @@
 				<type>like</type>         
 			</_1>	
 		</fields>
-	</CatalogItem>
+	</Product>
 	<Categories>
 		<result>
 			<plugin>categories</plugin>

@@ -139,9 +139,12 @@ function getFieldName($field, $modelAlias) {
 	}
 	
 	
-function getExpressionCondition($data , $field) {
+/**
+ * @todo see if this can be deleted
+ */
+	public function getExpressionCondition($data , $field) {
 		if (!empty($data)) {
-			$conditions["CatalogItem.{$field['name']} {$field['operator']}"] = $data ;
+			$conditions["Product.{$field['name']} {$field['operator']}"] = $data ;
 		}
 		return $conditions;
 		
