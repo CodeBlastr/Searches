@@ -66,6 +66,6 @@ echo $this->Form->end('View Search Results');
   <?php }?>
   <?php } else if ($term || $this->request->data) { ?>
   <p>Sorry, your search did not return any matches.</p>
-  <?php echo $this->Html->link('See Only Orders/Projects', array('action' => 'advance'));?>
+  <?php echo $this->Html->link('See All', array('action' => 'advance'));?>
   <?php } ?>
 </div>
