@@ -9,8 +9,9 @@ class SearchIndexesController extends SearchableAppController {
 	public $uses = 'Searchable.SearchIndex';
 	//var $paginate = array('SearchIndex' => array('limit' => 20));
 	public $helpers = array('Searchable.Searchable');
-	
-	
+	public $components = array("Searchable.Google");
+
+
 	public function index() {
 		$term = null;
 		$type = '';
@@ -19,12 +20,12 @@ class SearchIndexesController extends SearchableAppController {
 			if (isset($this->request->data['SearchIndex']['term'])
 			&& !empty($this->request->data['SearchIndex']['term'])) {
 				$term = $this->request->data['SearchIndex']['term'];
-			} 
-			
+			}
+
 			if (isset($this->request->data['SearchIndex']['type'])
 				&& !empty($this->request->data['SearchIndex']['type'])) {
 				$type = $this->request->data['SearchIndex']['type'];
-			} 
+			}
 		} else {
 			// Add type condition if not All for post type
 			if (isset($this->request->params['named']['term']))
@@ -38,9 +39,9 @@ class SearchIndexesController extends SearchableAppController {
 			if (isset($this->request->query['type'])) {
 				$type  = $this->request->query['type'];
 			}
-				
+
 		}
-		
+
 		$showAll = true;
 		$xml = $this->getXml();
 		$input = array();
@@ -48,7 +49,7 @@ class SearchIndexesController extends SearchableAppController {
 			$models[$model] = $model;
 			if($type == '') {
 				$showAll = false;
-			} 
+			}
 			if ($model == $type || $type == '') {
 				$input[$model] = $val;
 				# the db fields to setup the search query
@@ -62,7 +63,7 @@ class SearchIndexesController extends SearchableAppController {
 		else :
 			$results = array();
 		endif;
-	
+
 		// Get types for select drop down
 		$displayName = !empty($val['Display']['name']) ? $val['Display']['name'] : $model;
 		$this->set(compact('results', 'models', 'term', 'type', 'displayName'));
@@ -70,10 +71,10 @@ class SearchIndexesController extends SearchableAppController {
 		$this->pageTitle = 'Search';
 
 	}
-	
-	
+
+
 	public function advance() {
-		
+
 		$term = null;
 		$type = null;
 		// Redirect with search data in the URL in pretty format
@@ -85,9 +86,9 @@ class SearchIndexesController extends SearchableAppController {
 		$this->set('xmlInput' , $this->getXml());
 		$this->pageTitle = 'Search';
 
-	}	
+	}
 
-	
+
 /**
  * getResults
  * Iterates over the search.xml to get the conditions and pass them to get the results of the models
@@ -113,18 +114,18 @@ class SearchIndexesController extends SearchableAppController {
 					}
 				}
 			}
-			
+
 			$options['conditions'] = $this->SearchIndex->parseCriteria($Model, $val['fields'], $searchType);
 			if (!$showAll) {
 				$options['limit'] = 3;
 			}
-			
+
 			$results[$model] = $Model->find('all', $options);
 		}
 
 		return $results;
 	}
-	
+
 	public function getXml() {
 		// XML file's location
 		if (file_exists(ROOT.DS.SITE_DIR.DS. 'Config'.DS.'Searchable'.DS.'search.xml')) {
@@ -141,4 +142,24 @@ class SearchIndexesController extends SearchableAppController {
 			throw Exception('No Search Configuration Present');
 		}
 	}
- }
+
+
+    function results() {
+		$start = (empty($this->request->query['start']) ? 0 : $this->request->query['start']);
+		$term = $this->request->query['term'];
+		$search_results = array();
+
+		//just send them back if the search is empty
+		if (empty($term)) {
+			//$this->redirect($this->referer());
+		} else {
+			$search_results = $this->Google->run_search($term, $start, false);
+			//debug($search_results) //uncomment to see return's structure
+		}
+
+		$this->set("search_results", $search_results);
+
+		$this->render();
+	}
+
+}
