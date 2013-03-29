@@ -22,8 +22,9 @@ echo $this->Form->end('View Search Results');
       foreach ($results as $model => $data) {
 	      if (count($data)) { 
 	      	if (count($models) > 1) {
-	      		echo __('<li><h2>%s</h2></li>', $displayName); 
+	      		echo __('<li><h2>%s</h2></li>', $model); 
 			}
+			echo $this->Html->link("Advance Search For {$model}", array('action' => 'advance', 'model' => $model), array('class'=>'btn btn-mini pull-right'));
 	      	foreach ($data as $result) {
 	      		echo '<li>'; 
 		     	if ($xmlInput[$model]['result']) {
@@ -33,7 +34,7 @@ echo $this->Form->end('View Search Results');
 						$result[$model][$xmlInput[$model]['result']['id']]
 				);
 				$title = $result[$model][$xmlInput[$model]['result']['title']];
-				$description = substr(strip_tags($result[$model][$xmlInput[$model]['result']['description']]), 0, 50);
+				$description = $this->Text->truncate(strip_tags($result[$model][$xmlInput[$model]['result']['description']]), 75, array('ellipsis' => '...', 'exact' => false));
 				} else {
 					$url = '#';
 					$title = $result[$model]['name'];
@@ -45,9 +46,9 @@ echo $this->Form->end('View Search Results');
 		        <p><?php echo $description;?></p>
 		      </li>
 	      <?php 
-	      	echo $this->Html->link("Advance Search For {$displayName}", array('action' => 'advance', 'model' => $model));
+	      	
 		  } ?>
-	      <li> <?php echo $this->Html->link('See All the results for ' . $displayName, 
+	      <li> <?php echo $this->Html->link('See All the results for ' . $model, 
 		    		//array('plugin' => 'searchable', 'controller' => 'search_indexes', 'action' => 'index', 'type'=>$model, 'term'=>$term),
 		    		"/searchable/search_indexes/index/type:{$model}/term:{$term}", 
 		    		array('id'=>$model));
